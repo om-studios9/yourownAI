@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>OM's AI | NCERT Smart Tutor</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+
+body{
+
+height:100vh;
+background:
+radial-gradient(circle at top,#1e3a8a,#020617);
+
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+
+}
+
+
+
+.app{
+
+width:95%;
+max-width:1200px;
+height:90vh;
+
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(25px);
+
+border-radius:30px;
+
+display:grid;
+grid-template-columns:280px 1fr;
+
+overflow:hidden;
+
+box-shadow:
+0 0 50px #00ffff55;
+
+}
+
+
+
+.sidebar{
+
+padding:25px;
+
+background:
+rgba(0,0,0,0.25);
+
+}
+
+
+.logo{
+
+font-size:35px;
+font-weight:bold;
+
+background:
+linear-gradient(90deg,#00ffff,#a855f7);
+
+color:transparent;
+background-clip:text;
+
+}
+
+
+
+.ai-circle{
+
+width:130px;
+height:130px;
+
+margin:40px auto;
+
+border-radius:50%;
+
+background:
+linear-gradient(45deg,#00ffff,#9333ea);
+
+animation:pulse 2s infinite;
+
+
+box-shadow:
+0 0 40px cyan;
+
+}
+
+
+
+@keyframes pulse{
+
+50%{
+transform:scale(1.15);
+}
+
+}
+
+
+
+select{
+
+width:100%;
+padding:15px;
+
+margin-top:15px;
+
+border-radius:15px;
+
+background:#020617;
+color:white;
+
+border:1px solid #00ffff;
+
+
+}
+
+
+
+.main{
+
+display:flex;
+flex-direction:column;
+
+}
+
+
+
+.header{
+
+padding:25px;
+
+font-size:22px;
+
+border-bottom:
+1px solid #ffffff22;
+
+}
+
+
+
+.chat{
+
+flex:1;
+padding:30px;
+
+overflow:auto;
+
+}
+
+
+
+.bot,.user{
+
+
+max-width:70%;
+
+padding:18px;
+
+margin:15px;
+
+border-radius:20px;
+
+line-height:1.6;
+
+}
+
+
+
+.bot{
+
+background:
+rgba(0,255,255,0.15);
+
+border-left:4px solid cyan;
+
+}
+
+
+
+.user{
+
+background:
+rgba(168,85,247,0.3);
+
+margin-left:auto;
+
+}
+
+
+
+.input{
+
+display:flex;
+padding:20px;
+
+gap:10px;
+
+}
+
+
+
+input{
+
+flex:1;
+
+padding:18px;
+
+border-radius:20px;
+
+border:none;
+
+background:#020617;
+
+color:white;
+
+font-size:16px;
+
+}
+
+
+
+button{
+
+padding:18px 30px;
+
+border-radius:20px;
+
+border:none;
+
+cursor:pointer;
+
+background:
+linear-gradient(90deg,#06b6d4,#9333ea);
+
+color:white;
+
+font-weight:bold;
+
+}
+
+
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+
+<div class="app">
+
+
+
+<div class="sidebar">
+
+
+<div class="logo">
+OM's AI
+</div>
+
+
+<div class="ai-circle"></div>
+
+
+<h3>
+Student Mode
+</h3>
+
+
+<select>
+<option>Class 12 Science</option>
+<option>Class 12 Commerce</option>
+<option>Class 11 Science</option>
+<option>Class 10</option>
+<option>Class 9</option>
+</select>
+
+
+<select>
+
+<option>GSEB + NCERT</option>
+<option>CBSE NCERT</option>
+
+</select>
+
+
+
+</div>
+
+
+
+
+<div class="main">
+
+
+
+<div class="header">
+
+🤖 AI Study Assistant
+
+</div>
+
+
+
+<div class="chat" id="chat">
+
+
+<div class="bot">
+
+Hello 👋  
+I am OM's AI Tutor.
+
+Ask me anything from NCERT Class 9-12 Science or Commerce.
+
+Example:
+"Explain characteristics of electric field lines"
+
+</div>
+
+
+</div>
+
+
+
+
+<div class="input">
+
+
+<input id="question"
+placeholder="Ask your NCERT question...">
+
+
+<button onclick="send()">
+
+Ask AI
+
+</button>
+
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+<script>
+
+
+async function send(){
+
+
+let q=document.getElementById("question").value;
+
+
+if(!q)return;
+
+
+
+let chat=document.getElementById("chat");
+
+
+
+chat.innerHTML +=
+
+`
+<div class="user">
+${q}
+</div>
+`;
+
+
+
+
+/*
+
+Here your backend API will connect.
+
+Example:
+
+fetch("/ask-ai")
+
+*/
+
+
+setTimeout(()=>{
+
+
+chat.innerHTML +=
+
+`
+
+<div class="bot">
+
+⚡ AI Answer:
+
+Electric field lines are imaginary lines that represent the electric field around a charge.
+
+Characteristics:
+
+1. They start from positive charge and end on negative charge.
+
+2. Tangent at any point gives field direction.
+
+3. Two field lines never intersect.
+
+4. More density means stronger electric field.
+
+5. They are continuous curves.
+
+NCERT Exam Tip:
+Remember:
+"Closer lines = Stronger field"
+
+</div>
+
+`;
+
+
+
+chat.scrollTop=chat.scrollHeight;
+
+
+
+},1000);
+
+
+
+document.getElementById("question").value="";
+
+
+}
+
+
+
+</script>
+
+
+</body>
+</html>
